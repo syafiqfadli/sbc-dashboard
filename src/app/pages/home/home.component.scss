@@ -1,0 +1,60 @@
+table {
+  width: 100%;
+  margin-top: 20px;
+
+  th {
+    background-color: white;
+    color: #181818;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  td {
+    padding: 10px;
+    text-align: right;
+    border-radius: 5px;
+    border: 1px solid white;
+
+    &:nth-child(1) {
+      text-align: left;
+    }
+  }
+}
+
+#title {
+  display: flex;
+  align-items: center;
+
+  h2 {
+    margin: 0;
+    margin-right: 10px;
+  }
+}
+
+#desc {
+  p {
+    margin: 0;
+  }
+
+  #time {
+    font-size: 12px;
+    color: #d3d3d379
+  }
+}
+
+.carousel-container {
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 30px;
+
+  .carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+
+    img {
+      width: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+  }
+}

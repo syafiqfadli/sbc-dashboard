@@ -1,0 +1,39 @@
+<div class="page-container">
+  <div class="carousel-container">
+    <h2>Album</h2>
+    <div
+      class="carousel"
+      [style.transform]="'translateX(' + transformValue + ')'"
+    >
+      <img *ngFor="let slide of slides" [src]="slide" alt="Image" />
+    </div>
+  </div>
+  <div id="title">
+    <h2>Match Table</h2>
+    <mat-icon class="icon" (click)="editTable()">edit</mat-icon>
+  </div>
+  <div id="desc">
+    <p>Total players: {{ players.length }}</p>
+    <p id="time">Last Update: {{lastUpdate}}</p>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Player</th>
+        <th>Match</th>
+        <th>Win</th>
+        <th>Lose</th>
+        <th>Points</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let player of players">
+      <tr>
+        <td>{{ capitalizeName(player.name) }}</td>
+        <td>{{ player.match }}</td>
+        <td>{{ player.win }}</td>
+        <td>{{ player.lose }}</td>
+        <td>{{ player.points }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

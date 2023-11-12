@@ -1,0 +1,27 @@
+<div id="navbar">
+  <img src="../../../assets/SBC-logo.png" alt="logo" (click)="navigateRoute('home')">
+  <ul id="nav-list-web">
+    <li class="nav-item" (click)="navigateRoute('home')">Home</li>
+    <li class="nav-item" (click)="navigateRoute('ranking')">Ranking</li>
+    <li class="nav-item" (click)="navigateRoute('statistic')">Statistic</li>
+  </ul>
+  <ul id="nav-list-mobile">
+    <div id="hamburger" (click)="handleHamburger()">
+      <div class="ham-div"></div>
+      <div class="ham-div"></div>
+      <div class="ham-div"></div>
+    </div>
+    <div *ngIf="hamburgerOpen" id="nav-box">
+      <div id="close">
+        <div id="x-button" (click)="handleHamburger()">X</div>
+      </div>
+      <li class="nav-item mobile-item" (click)="navigateRoute('home')">Home</li>
+      <li class="nav-item mobile-item" (click)="navigateRoute('ranking')">
+        Ranking
+      </li>
+      <li class="nav-item mobile-item" (click)="navigateRoute('statistic')">
+        Statistic
+      </li>
+    </div>
+  </ul>
+</div>

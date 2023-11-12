@@ -1,0 +1,48 @@
+<mat-dialog-content>
+  <mat-tab-group>
+    <mat-tab label="Edit Match">
+      
+      <div id="edit-match">
+        <div id="edit-header">
+          <p>Player</p>
+          <p class="condition">Win</p>
+          <p class="condition">Lose</p>
+          <p>FX</p>
+        </div>
+        <div class="edit-input" id="match" *ngFor="let match of playerMatch">
+          <input
+            type="text"
+            id="match-name"
+            disabled
+            [value]="capitalizeName(match.name)"
+          />
+          <input type="text" disabled [value]="match.win" />
+          <input type="text" disabled [value]="match.lose" />
+          <mat-icon class="icon" (click)="deletePlayerMatch(match)"
+            >delete_outline</mat-icon
+          >
+        </div>
+        <form class="edit-input" [formGroup]="editForm" name="editForm">
+          <select formControlName="name">
+            <option *ngFor="let player of players" [value]="player.name">
+              {{ capitalizeName(player.name) }}
+            </option>
+          </select>
+          <input type="number" placeholder="0" formControlName="win" />
+          <input type="number" placeholder="0" formControlName="lose" />
+          <mat-icon class="icon" (click)="addPlayerMatch()"
+            >add_circle_outline</mat-icon
+          >
+        </form>
+
+        <button (click)="updateMatch()">Update</button>
+      </div>
+    </mat-tab>
+    <mat-tab label="Add Player">
+      <form id="add-player" [formGroup]="addForm" name="addForm">
+        <input type="text" placeholder="Enter name" formControlName="name" />
+        <button (click)="addPlayer()">Add</button>
+      </form>
+    </mat-tab>
+  </mat-tab-group>
+</mat-dialog-content>

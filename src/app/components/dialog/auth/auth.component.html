@@ -1,0 +1,22 @@
+<mat-dialog-content>
+  <h2>Log In</h2>
+  <form [formGroup]="authForm" name="authForm">
+    <div class="auth-input">
+      <label>Username</label>
+      <input
+        type="text"
+        placeholder="Enter username"
+        formControlName="username"
+      />
+    </div>
+    <div class="auth-input">
+      <label>Password</label>
+      <input
+        type="password"
+        placeholder="Enter password"
+        formControlName="password"
+      />
+    </div>
+    <button (click)="logIn()">Log In</button>
+  </form>
+</mat-dialog-content>
