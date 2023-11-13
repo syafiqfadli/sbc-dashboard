@@ -1,4 +1,4 @@
 export const environment = {
-  production: false,
-  apiUrl: 'http://localhost:2811',
+  production: true,
+  apiUrl: 'https://sbc-server-ab23w5atpq-as.a.run.app',
 };
