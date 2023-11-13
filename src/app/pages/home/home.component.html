@@ -5,7 +5,7 @@
       class="carousel"
       [style.transform]="'translateX(' + transformValue + ')'"
     >
-      <img *ngFor="let slide of slides" [src]="slide" alt="Image" />
+      <img *ngFor="let slide of slides" alt="Image" [src]="slide" />
     </div>
   </div>
   <div id="title">
@@ -14,7 +14,7 @@
   </div>
   <div id="desc">
     <p>Total players: {{ players.length }}</p>
-    <p id="time">Last Update: {{lastUpdate}}</p>
+    <p id="time">Last Update: {{ lastUpdate }}</p>
   </div>
   <table>
     <thead>

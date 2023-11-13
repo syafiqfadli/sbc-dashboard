@@ -1,12 +1,11 @@
 <mat-dialog-content>
   <mat-tab-group>
     <mat-tab label="Edit Match">
-      
       <div id="edit-match">
         <div id="edit-header">
           <p>Player</p>
-          <p class="condition">Win</p>
-          <p class="condition">Lose</p>
+          <p id="win">Win</p>
+          <p id="lose">Lose</p>
           <p>FX</p>
         </div>
         <div class="edit-input" id="match" *ngFor="let match of playerMatch">

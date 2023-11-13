@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { EditTableComponent } from '../../components/dialog/edit-table/edit-table.component';
-import { AuthComponent } from 'src/app/components/dialog/auth/auth.component';
-import { PlayerService } from 'src/app/@core/services/player.service';
 import { PlayerModel } from 'src/app/@core/models/player.model';
+import { PlayerService } from 'src/app/@core/services/player.service';
 import { StringHelper } from 'src/app/@core/utils/helpers';
+import { AuthComponent } from 'src/app/components/dialog/auth/auth.component';
+import { EditTableComponent } from '../../components/dialog/edit-table/edit-table.component';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private playerService: PlayerService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.playerService.getPlayerList();
@@ -45,13 +45,15 @@ export class HomeComponent implements OnInit {
   }
 
   editTable() {
-    const dialogRef = this.dialog.open(AuthComponent);
+    const dialogRef = this.dialog.open(AuthComponent, {
+      width: '30%',
+    });
 
     dialogRef.afterClosed().subscribe((data) => {
       if (data) {
         this.dialog.open(EditTableComponent, {
           height: '40%',
-          width: '90%',
+          width: window.screen.width > 600 ? '400px' : '100%'
         });
       }
     });

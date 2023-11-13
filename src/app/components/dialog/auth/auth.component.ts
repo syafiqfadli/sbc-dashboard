@@ -30,7 +30,7 @@ export class AuthComponent implements OnInit {
 
     if (
       this.authForm.value['username'] !== 'root' ||
-      this.authForm.value['password'] !== 'password'
+      this.authForm.value['password'] !== 'sbc123'
     ) {
       alert('Wrong credential');
       return;
