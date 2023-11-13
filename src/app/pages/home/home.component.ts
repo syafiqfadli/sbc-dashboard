@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit {
 
   editTable() {
     const dialogRef = this.dialog.open(AuthComponent, {
-      width: '30%',
+      width: window.screen.width > 600 ? '400px' : '100%'
     });
 
     dialogRef.afterClosed().subscribe((data) => {
