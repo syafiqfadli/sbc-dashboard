@@ -87,4 +87,14 @@
       display: block;
     }
   }
+
+  @media screen and (min-width: 1000px)  {
+    img {
+      padding: 0 60px;
+    }
+
+    #nav-list-web {
+      padding: 0 60px;
+    }
+  }
 }
