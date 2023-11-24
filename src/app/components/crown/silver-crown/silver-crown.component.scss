@@ -1,0 +1,79 @@
+$size: 6rem;
+
+.crown {
+  position: absolute;
+  transform: translate(-50%, -250%);
+  width: $size;
+  height: calc($size/1.1);
+  overflow: hidden;
+
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: calc($size/-8);
+    left: 0;
+    width: 100%;
+    height: calc($size/2);
+    background-color: silver;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+  }
+
+  .point {
+    position: absolute;
+    background-color: silver;
+    transform: translate(-50%, 50%) rotate(45deg) skew(30deg, 30deg);
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: calc($size/5);
+      height: calc($size/5);
+      border-radius: calc($size/5);
+      background-color: silver;
+      transform: translate(-50%, -50%) skew(-30deg, -30deg);
+    }
+
+    &:first-child,
+    &:last-child {
+      top: calc($size/2);
+      width: $size;
+      height: $size;
+    }
+
+    &:nth-child(2),
+    &:nth-child(4) {
+      top: calc($size/3);
+      width: $size;
+      height: $size;
+    }
+
+    &:nth-child(3) {
+      top: calc($size/4);
+      width: $size;
+      height: $size;
+    }
+
+    &:first-child {
+      left: 0;
+    }
+
+    &:nth-child(2) {
+      left: 25%;
+    }
+
+    &:nth-child(3) {
+      left: 50%;
+    }
+
+    &:nth-child(4) {
+      left: 75%;
+    }
+
+    &:last-child {
+      left: 100%;
+    }
+  }
+}

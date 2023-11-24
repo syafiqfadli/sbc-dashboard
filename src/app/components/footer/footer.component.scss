@@ -1,0 +1,28 @@
+#footer {
+  padding: 30px;
+  background-color: #363636;
+
+  p {
+    text-align: center;
+    margin: 0;
+  }
+
+  #contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+
+    img {
+      height: 20px;
+      background-color: white;
+      padding: 5px;
+      border-radius: 20px;
+      margin: 0 5px;
+    }
+
+    a {
+      color: gold;
+    }
+  }
+}

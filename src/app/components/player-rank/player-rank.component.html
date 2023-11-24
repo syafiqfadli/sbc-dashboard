@@ -1,0 +1,50 @@
+<div
+  id="player-container"
+  [style]="
+    rank === 1
+      ? 'height: 300px'
+      : rank === 2 || rank === 3
+      ? 'height: 250px'
+      : null
+  "
+>
+  <div
+    id="profile-pic"
+    [style]="
+      rank === 1
+        ? 'width: 200px; height: 200px; border-radius: 100px'
+        : rank === 2 || rank === 3
+        ? 'width: 150px; height: 150px; border-radius: 75px'
+        : ''
+    "
+  >
+    <img
+      src="/assets/icon/person.png"
+      alt=""
+      [style]="
+        rank === 1
+          ? 'height: 60px'
+          : rank === 2 || rank === 3
+          ? 'height: 40px'
+          : 'height: 20px'
+      "
+    />
+  </div>
+  <p id="rank" *ngIf="rank > 3">
+    {{ rank }}
+  </p>
+  <app-gold-crown *ngIf="rank === 1"></app-gold-crown>
+  <app-silver-crown *ngIf="rank === 2"></app-silver-crown>
+  <app-bronze-crown *ngIf="rank === 3"></app-bronze-crown>
+  <p
+    [style]="
+      rank === 1
+        ? 'font-size: 30px'
+        : rank === 2 || rank === 3
+        ? 'font-size: 20px'
+        : null
+    "
+  >
+    {{ capitalizeName(player?.name) }}
+  </p>
+</div>
