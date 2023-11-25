@@ -1,0 +1,26 @@
+<div class="page-container">
+  <h2>Generate Fixture</h2>
+  <div *ngIf="fixtures.length">
+    <button id="regenerate" (click)="openFixture()">Regenerate Fixture</button>
+    <p>Total matches: {{ fixtures.length }}</p>
+    <div *ngFor="let fx of fixtures; let i = index">
+      <div id="match">
+        <p>Match {{ i + 1 }}</p>
+        <div id="fixture">
+          <div class="players">
+            <p>{{ capitalizeName(fx.teamA[0]) }}</p>
+            <p>{{ capitalizeName(fx.teamA[1]) }}</p>
+          </div>
+          <div id="vs">VS</div>
+          <div class="players">
+            <p>{{ capitalizeName(fx.teamB[0]) }}</p>
+            <p>{{ capitalizeName(fx.teamB[1]) }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button id="generate" *ngIf="!fixtures.length" (click)="openFixture()">
+    Generate Fixture
+  </button>
+</div>

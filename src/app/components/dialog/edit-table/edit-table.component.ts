@@ -19,9 +19,8 @@ export class EditTableComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private dialogRef: MatDialogRef<EditTableComponent>,
     private playerService: PlayerService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.playerService.playersObserver().subscribe((data) => {
@@ -74,7 +73,7 @@ export class EditTableComponent implements OnInit {
       return;
     }
 
-    if ((win < 0 || win > 10) || (lose < 0 || lose > 10)) {
+    if (win < 0 || win > 10 || lose < 0 || lose > 10) {
       alert('Please enter range between 1 - 10 only.');
       return;
     }

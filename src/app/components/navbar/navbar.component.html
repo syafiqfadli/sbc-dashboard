@@ -1,6 +1,6 @@
 <div id="navbar">
   <img
-    src="../../../assets/SBC-logo.png"
+    src="/assets/SBC-logo.png"
     alt="logo"
     (click)="navigateRoute('home')"
   />
@@ -8,6 +8,9 @@
     <li class="nav-item" (click)="navigateRoute('home')">Home</li>
     <li class="nav-item" (click)="navigateRoute('podium')">Podium</li>
     <li class="nav-item" (click)="navigateRoute('statistic')">Statistic</li>
+    <li class="nav-item" (click)="navigateRoute('fixture')">
+      Generate Fixture
+    </li>
   </ul>
   <ul id="nav-list-mobile">
     <div id="hamburger" (click)="handleHamburger()">
@@ -25,6 +28,9 @@
       </li>
       <li class="nav-item mobile-item" (click)="navigateRoute('statistic')">
         Statistic
+      </li>
+      <li class="nav-item mobile-item" (click)="navigateRoute('fixture')">
+        Generate Fixture
       </li>
       <p id="nav-footer">SBC@2023</p>
     </div>

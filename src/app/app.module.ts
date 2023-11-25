@@ -19,6 +19,8 @@ import { GoldCrownComponent } from './components/crown/gold-crown/gold-crown.com
 import { SilverCrownComponent } from './components/crown/silver-crown/silver-crown.component';
 import { BronzeCrownComponent } from './components/crown/bronze-crown/bronze-crown.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { FixtureComponent } from './pages/fixture/fixture.component';
+import { GenerateFixtureComponent } from './components/dialog/generate-fixture/generate-fixture.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { FooterComponent } from './components/footer/footer.component';
     SilverCrownComponent,
     BronzeCrownComponent,
     FooterComponent,
+    FixtureComponent,
+    GenerateFixtureComponent,
   ],
   imports: [
     BrowserModule,

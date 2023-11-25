@@ -1,0 +1,31 @@
+#edit-match {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+
+  .edit-input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+
+    select {
+      padding: 10px;
+      width: 200px;
+    }
+
+    #match-name {
+      width: 180px;
+    }
+  }
+
+  #edit-header {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 10px;
+  }
+
+  button {
+    margin-top: 20px;
+  }
+}

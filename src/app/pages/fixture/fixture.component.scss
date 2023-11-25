@@ -1,0 +1,43 @@
+#match {
+  margin-bottom: 30px;
+  #fixture {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .players {
+      width: 20%;
+      border: 1px solid white;
+
+      p {
+        margin: 0;
+        text-align: center;
+      }
+    }
+
+    #vs {
+      background-color: white;
+      color: black;
+      padding: 10px;
+      border-radius: 20px;
+    }
+  }
+}
+
+button {
+  background-color: white;
+  color: #181818;
+  width: 200px;
+}
+
+#regenerate {
+    margin-bottom: 30px;
+}
+
+#generate {
+  position: absolute;
+  width: 50%;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+}
