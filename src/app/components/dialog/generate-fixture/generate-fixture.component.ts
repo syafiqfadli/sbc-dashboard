@@ -22,7 +22,7 @@ export class GenerateFixtureComponent implements OnInit {
     private fixtureService: FixtureService,
     private playerService: PlayerService,
     private dialogRef: MatDialogRef<GenerateFixtureComponent>
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.playerService.getPlayerList();
@@ -68,6 +68,11 @@ export class GenerateFixtureComponent implements OnInit {
 
   generateFixture() {
     const players = this.playerMatch.map((player) => player.name);
+
+    if (players.length < 4) {
+      alert('Player must have at least four.');
+      return;
+    }
 
     const res = this.fixtureService.generateFixture(players);
 
