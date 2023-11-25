@@ -11,7 +11,9 @@
             <p>{{ capitalizeName(fx.teamA[0]) }}</p>
             <p>{{ capitalizeName(fx.teamA[1]) }}</p>
           </div>
-          <div id="vs">VS</div>
+          <div id="vs" [ngClass]="getVSClass(i)" (click)="changeVSStatus(i)">
+            VS
+          </div>
           <div class="players">
             <p>{{ capitalizeName(fx.teamB[0]) }}</p>
             <p>{{ capitalizeName(fx.teamB[1]) }}</p>

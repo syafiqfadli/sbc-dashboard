@@ -16,10 +16,27 @@
     }
 
     #vs {
-      background-color: white;
-      color: black;
       padding: 10px;
       border-radius: 20px;
+    }
+
+    #vs:hover {
+      cursor: pointer;
+    }
+
+    .red-green {
+      background: linear-gradient(to right, red 50%, green 50%);
+      color: white;
+    }
+
+    .green-red {
+      background: linear-gradient(to right, green 50%, red 50%);
+      color: white;
+    }
+
+    .default {
+      background-color: white;
+      color: black;
     }
   }
 }
@@ -28,16 +45,5 @@ button {
   background-color: white;
   color: #181818;
   width: 200px;
-}
-
-#regenerate {
-    margin-bottom: 30px;
-}
-
-#generate {
-  position: absolute;
-  width: 50%;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, 50%);
+  margin-bottom: 30px;
 }

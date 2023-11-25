@@ -12,17 +12,33 @@ import { GenerateFixtureComponent } from 'src/app/components/dialog/generate-fix
 })
 export class FixtureComponent implements OnInit {
   fixtures: FixtureModel[] = [];
+  vsStatus: boolean[] = [];
+
+  private fixtureKey: string = 'fixture';
+  private statusKey: string = 'status';
+
   constructor(
     private dialog: MatDialog,
     private fixtureService: FixtureService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.fixtureService.fixturesObserver().subscribe((data) => {
-      this.fixtures = data;
-    });
+    if (localStorage.getItem(this.fixtureKey)) {
+      this.fixtures = JSON.parse(localStorage.getItem(this.fixtureKey))
+    }
 
-    console.log(this.fixtures);
+    if (localStorage.getItem(this.statusKey)) {
+      this.vsStatus = JSON.parse(localStorage.getItem(this.statusKey))
+    }
+
+    this.fixtureService.fixturesObserver().subscribe((data) => {
+      if (data.length) {
+        this.vsStatus = [];
+        this.fixtures = data;
+        localStorage.setItem(this.fixtureKey, JSON.stringify(this.fixtures));
+        localStorage.removeItem(this.statusKey);
+      }
+    });
   }
 
   openFixture() {
@@ -33,5 +49,25 @@ export class FixtureComponent implements OnInit {
 
   capitalizeName(name: string) {
     return StringHelper.capitalizeFirst(name);
+  }
+
+  getVSClass(index: number): string {
+    return this.vsStatus[index]
+      ? 'green-red'
+      : this.vsStatus[index] === false
+        ? 'red-green'
+        : 'default';
+  }
+
+  changeVSStatus(index: number) {
+    if (this.vsStatus[index] === undefined) {
+      this.vsStatus[index] = true;
+    } else if (this.vsStatus[index]) {
+      this.vsStatus[index] = false;
+    } else {
+      this.vsStatus[index] = undefined;
+    }
+
+    localStorage.setItem(this.statusKey, JSON.stringify(this.vsStatus));
   }
 }
