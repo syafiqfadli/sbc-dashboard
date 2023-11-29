@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PlayerModel } from 'src/app/@core/models/player.model';
 import { ResponseModel } from 'src/app/@core/models/response.model';
 import { FixtureService } from 'src/app/@core/services/fixture.service';
 import { PlayerService } from 'src/app/@core/services/player.service';
 import { StringHelper } from 'src/app/@core/utils/helpers';
+import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
   selector: 'app-generate-fixture',
@@ -21,6 +22,7 @@ export class GenerateFixtureComponent implements OnInit {
     private formBuilder: FormBuilder,
     private fixtureService: FixtureService,
     private playerService: PlayerService,
+    private dialog: MatDialog,
     private dialogRef: MatDialogRef<GenerateFixtureComponent>
   ) { }
 
@@ -66,7 +68,7 @@ export class GenerateFixtureComponent implements OnInit {
     }
   }
 
-  generateFixture() {
+  async generateFixture() {
     const players = this.playerMatch.map((player) => player.name);
 
     if (players.length < 4) {
@@ -74,9 +76,18 @@ export class GenerateFixtureComponent implements OnInit {
       return;
     }
 
+    const loadingRef = this.dialog.open(LoadingComponent, {
+      data: {
+        message: "Generating fixture"
+      },
+      disableClose: true,
+    })
+
     const res = this.fixtureService.generateFixture(players);
 
     res.subscribe((data: ResponseModel) => {
+      loadingRef.close();
+
       if (!data.isSuccess) {
         alert(data.message);
         return;
