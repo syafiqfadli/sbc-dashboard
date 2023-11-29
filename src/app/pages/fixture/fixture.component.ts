@@ -184,7 +184,7 @@ export class FixtureComponent implements OnInit {
   }
 
   changeVSStatus(index: number) {
-    if (this.vsStatus[index] === null) {
+    if (this.vsStatus[index] === null || this.vsStatus[index] === undefined) {
       this.vsStatus[index] = true;
     } else if (this.vsStatus[index] === true) {
       this.vsStatus[index] = false;
