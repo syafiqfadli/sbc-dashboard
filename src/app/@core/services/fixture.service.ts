@@ -1,10 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { PlayerModel } from '../models/player.model';
-import { ResponseModel } from '../models/response.model';
+import { environment } from 'src/environments/environment.prod';
 import { FixtureModel } from '../models/fixture.model';
+import { ResponseModel } from '../models/response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +19,7 @@ export class FixtureService {
     FixtureModel[]
   >([]);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   fixturesObserver() {
     return this.fixtures;

@@ -11,6 +11,29 @@ body {
   color: white;
 }
 
+table {
+  width: 100%;
+  margin-top: 20px;
+
+  th {
+    background-color: white;
+    color: #181818;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  td {
+    padding: 10px;
+    text-align: right;
+    border-radius: 5px;
+    border: 1px solid white;
+
+    &:nth-child(1) {
+      text-align: left;
+    }
+  }
+}
+
 input {
   padding: 10px;
   border: 1px solid #181818;

@@ -1,28 +1,109 @@
 <div class="page-container">
-  <h2>Generate Fixture</h2>
-  <div *ngIf="fixtures.length">
-    <button id="regenerate" (click)="openFixture()">Regenerate Fixture</button>
-    <p>Total matches: {{ fixtures.length }}</p>
-    <div *ngFor="let fx of fixtures; let i = index">
-      <div id="match">
-        <p>Match {{ i + 1 }}</p>
-        <div id="fixture">
-          <div class="players">
-            <p>{{ capitalizeName(fx.teamA[0]) }}</p>
-            <p>{{ capitalizeName(fx.teamA[1]) }}</p>
+  <div *ngIf="!hasResult">
+    <h2>Generate Fixture</h2>
+    <div *ngIf="hasFixtureKey()" id="fixture-container">
+      <form [formGroup]="searchForm" id="actions">
+        <div id="search">
+          <input
+            formControlName="name"
+            type="text"
+            placeholder="Search fixture..."
+          />
+          <button (click)="searchFixture()"><mat-icon>search</mat-icon></button>
+        </div>
+        <button (click)="openFixture()"><mat-icon>refresh</mat-icon></button>
+      </form>
+      <div *ngIf="fixtures.length">
+        <div class="show-container">
+          <p style="font-size: 16px">Total matches: {{ fixtures.length }}</p>
+          <button
+            [disabled]="disableShowResult()"
+            [ngClass]="disableShowResult() ? 'disable' : 'enable'"
+            (click)="disableShowResult() ? '' : showResult()"
+          >
+            Show Result
+          </button>
+        </div>
+        <div *ngFor="let fx of fixtures">
+          <div class="match">
+            <p>Match {{ fx.fixture + 1 }}</p>
+            <div class="fixture">
+              <div class="players">
+                <p>{{ capitalizeName(fx.teamA[0]) }}</p>
+                <p>{{ capitalizeName(fx.teamA[1]) }}</p>
+              </div>
+              <div
+                class="vs"
+                [ngClass]="getVSClass(fx.fixture)"
+                (click)="changeVSStatus(fx.fixture)"
+              >
+                VS
+              </div>
+              <div class="players">
+                <p>{{ capitalizeName(fx.teamB[0]) }}</p>
+                <p>{{ capitalizeName(fx.teamB[1]) }}</p>
+              </div>
+            </div>
           </div>
-          <div id="vs" [ngClass]="getVSClass(i)" (click)="changeVSStatus(i)">
-            VS
-          </div>
-          <div class="players">
-            <p>{{ capitalizeName(fx.teamB[0]) }}</p>
-            <p>{{ capitalizeName(fx.teamB[1]) }}</p>
+        </div>
+      </div>
+      <div *ngIf="!fixtures.length">
+        <p>No fixture found.</p>
+      </div>
+    </div>
+
+    <button id="generate" *ngIf="!hasFixtureKey()" (click)="openFixture()">
+      Generate Fixture
+    </button>
+  </div>
+
+  <div *ngIf="hasResult" id="result-container">
+    <h2>Result</h2>
+    <div *ngIf="resultFixtures.length">
+      <div class="show-container">
+        <p style="font-size: 16px">
+          Total matches: {{ resultFixtures.length }}
+        </p>
+        <button (click)="showFixture()" class="result-action" id="back">
+          <mat-icon>keyboard_return</mat-icon>
+        </button>
+        <button (click)="updatePlayers()" class="result-action">
+          <mat-icon>update</mat-icon>
+        </button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th>Win</th>
+            <th>Lose</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let player of playerStats">
+          <tr>
+            <td>{{ capitalizeName(player.name) }}</td>
+            <td>{{ player.win }}</td>
+            <td>{{ player.lose }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div *ngFor="let fx of resultFixtures">
+        <div class="match">
+          <p>Match {{ fx.fixture + 1 }}</p>
+          <div class="fixture">
+            <div class="players">
+              <p>{{ capitalizeName(fx.teamA[0]) }}</p>
+              <p>{{ capitalizeName(fx.teamA[1]) }}</p>
+            </div>
+            <div class="vs" [ngClass]="getVSClass(fx.fixture)">VS</div>
+            <div class="players">
+              <p>{{ capitalizeName(fx.teamB[0]) }}</p>
+              <p>{{ capitalizeName(fx.teamB[1]) }}</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <button id="generate" *ngIf="!fixtures.length" (click)="openFixture()">
-    Generate Fixture
-  </button>
 </div>

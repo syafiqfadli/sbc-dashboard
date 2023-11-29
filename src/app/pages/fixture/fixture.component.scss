@@ -1,6 +1,72 @@
-#match {
-  margin-bottom: 30px;
-  #fixture {
+#fixture-container {
+  margin-bottom: 80px;
+
+  #actions {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+
+    button {
+      width: 50px;
+      padding: 9px;
+      margin: 0;
+      margin-left: 10px;
+    }
+
+    #search {
+      display: flex;
+      align-items: center;
+
+      input {
+        padding: 15px;
+        margin-right: 10px;
+      }
+
+      button {
+        margin: 0;
+      }
+    }
+  }
+}
+
+#result-container {
+  margin-bottom: 80px;
+}
+
+.show-container {
+  display: flex;
+  align-items: center;
+
+  p {
+    margin: 0;
+    margin-right: 20px;
+  }
+
+  button {
+    margin: 0;
+    width: 100px;
+  }
+
+  .disable {
+    background-color: grey;
+    cursor: default;
+  }
+
+  #back {
+    margin-right: 10px;
+  }
+
+  .result-action {
+    width: 50px;
+    padding: 2px;
+    margin: 0;
+  }
+}
+
+.match {
+  margin: 15px 0;
+
+  .fixture {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -15,12 +81,12 @@
       }
     }
 
-    #vs {
+    .vs {
       padding: 10px;
       border-radius: 20px;
     }
 
-    #vs:hover {
+    .vs:hover {
       cursor: pointer;
     }
 

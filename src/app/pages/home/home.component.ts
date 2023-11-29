@@ -52,7 +52,6 @@ export class HomeComponent implements OnInit {
     dialogRef.afterClosed().subscribe((data) => {
       if (data) {
         this.dialog.open(EditTableComponent, {
-          height: '40%',
           width: window.screen.width > 600 ? '400px' : '100%'
         });
       }

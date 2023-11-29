@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
 import { PlayerModel } from '../models/player.model';
 import { ResponseModel } from '../models/response.model';
 
@@ -19,7 +19,7 @@ export class PlayerService {
     PlayerModel[]
   >([]);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   playersObserver() {
     return this.players;

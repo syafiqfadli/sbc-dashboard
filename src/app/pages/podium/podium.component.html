@@ -1,9 +1,11 @@
 <div class="page-container">
   <h2>Podium</h2>
-  <app-player-rank [player]="players[0]" [rank]="1"></app-player-rank>
-  <div id="ranking-list">
-    <div *ngFor="let player of filteredPlayers(); let i = index">
-      <app-player-rank [player]="player" [rank]="i + 2"></app-player-rank>
+  <div *ngIf="players.length">
+    <app-player-rank [player]="players[0]" [rank]="1"></app-player-rank>
+    <div id="ranking-list">
+      <div *ngFor="let player of filteredPlayers(); let i = index">
+        <app-player-rank [player]="player" [rank]="i + 2"></app-player-rank>
+      </div>
     </div>
   </div>
 </div>

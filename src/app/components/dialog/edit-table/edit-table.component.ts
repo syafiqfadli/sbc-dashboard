@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { PlayerModel } from 'src/app/@core/models/player.model';
 import { ResponseModel } from 'src/app/@core/models/response.model';
 import { PlayerService } from 'src/app/@core/services/player.service';
 import { StringHelper } from 'src/app/@core/utils/helpers';
+import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
   selector: 'app-edit-table',
@@ -18,9 +19,10 @@ export class EditTableComponent implements OnInit {
   playerMatch: PlayerModel[] = [];
 
   constructor(
+    private dialog: MatDialog,
     private formBuilder: FormBuilder,
     private playerService: PlayerService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.playerService.playersObserver().subscribe((data) => {
@@ -44,10 +46,19 @@ export class EditTableComponent implements OnInit {
       return;
     }
 
+    const loadingRef = this.dialog.open(LoadingComponent, {
+      data: {
+        message: "Adding player"
+      },
+      disableClose: true,
+    })
+
     const name = this.addForm.value['name'];
     const res = this.playerService.createPlayer(name);
 
     res.subscribe((data: ResponseModel) => {
+      loadingRef.close();
+
       if (!data.isSuccess) {
         alert(data.message);
         return;
@@ -101,15 +112,24 @@ export class EditTableComponent implements OnInit {
     }
   }
 
-  updateMatch() {
+  updateStats() {
     if (this.playerMatch.length === 0) {
       alert('Please add at least one player.');
       return;
     }
 
+    const loadingRef = this.dialog.open(LoadingComponent, {
+      data: {
+        message: "Updating stats"
+      },
+      disableClose: true,
+    })
+
     const res = this.playerService.updateMatch(this.playerMatch);
 
     res.subscribe((data: ResponseModel) => {
+      loadingRef.close();
+
       if (!data.isSuccess) {
         alert(data.message);
         return;
