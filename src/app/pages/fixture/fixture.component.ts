@@ -10,6 +10,7 @@ import { StringHelper } from 'src/app/@core/utils/helpers';
 import { AuthComponent } from 'src/app/components/dialog/auth/auth.component';
 import { GenerateFixtureComponent } from 'src/app/components/dialog/generate-fixture/generate-fixture.component';
 import { LoadingComponent } from 'src/app/components/dialog/loading/loading.component';
+import { MessageComponent } from 'src/app/components/dialog/message/message.component';
 
 @Component({
   selector: 'app-fixture',
@@ -21,6 +22,7 @@ export class FixtureComponent implements OnInit {
   fixtures: FixtureModel[] = [];
   resultFixtures: FixtureModel[] = [];
   vsStatus: boolean[] | null[] = [];
+  vsResultStatus: boolean[] = [];
   hasResult: boolean = false;
   playerStats: PlayerModel[] = [];
 
@@ -85,6 +87,7 @@ export class FixtureComponent implements OnInit {
 
   showFixture() {
     this.hasResult = false;
+    this.vsStatus = JSON.parse(localStorage.getItem(this.statusKey))
   }
 
   disableShowResult() {
@@ -94,13 +97,13 @@ export class FixtureComponent implements OnInit {
   calculateWinLose() {
     let playerStatsList: PlayerModel[] = [];
 
-    this.resultFixtures.forEach((fx, index) => {
+    this.resultFixtures.forEach((fx) => {
       let player1 = new PlayerModel();
       let player2 = new PlayerModel();
       let player3 = new PlayerModel();
       let player4 = new PlayerModel();
 
-      if (this.vsStatus[index]) {
+      if (this.vsStatus[fx.fixture]) {
         player1 = new PlayerModel(fx.teamA[0], 1, 0);
         player2 = new PlayerModel(fx.teamA[1], 1, 0);
         player3 = new PlayerModel(fx.teamB[0], 0, 1);
@@ -157,15 +160,24 @@ export class FixtureComponent implements OnInit {
           loadingRef.close();
 
           if (!data.isSuccess) {
-            alert(data.message);
+            this.dialog.open(MessageComponent, {
+              data: {
+                message: data.message
+              }
+            })
             return;
           }
 
           this.playerService.getPlayerList();
-          alert(data.message);
           localStorage.removeItem(this.fixtureKey)
           localStorage.removeItem(this.statusKey)
           this.hasResult = false;
+
+          this.dialog.open(MessageComponent, {
+            data: {
+              message: data.message
+            }
+          })
         });
       }
     });

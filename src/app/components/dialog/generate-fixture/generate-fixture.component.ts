@@ -7,6 +7,7 @@ import { FixtureService } from 'src/app/@core/services/fixture.service';
 import { PlayerService } from 'src/app/@core/services/player.service';
 import { StringHelper } from 'src/app/@core/utils/helpers';
 import { LoadingComponent } from '../loading/loading.component';
+import { MessageComponent } from '../message/message.component';
 
 @Component({
   selector: 'app-generate-fixture',
@@ -89,7 +90,11 @@ export class GenerateFixtureComponent implements OnInit {
       loadingRef.close();
 
       if (!data.isSuccess) {
-        alert(data.message);
+        this.dialog.open(MessageComponent, {
+          data: {
+            message: data.message
+          }
+        })
         return;
       }
 

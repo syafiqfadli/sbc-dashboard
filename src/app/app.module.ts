@@ -23,6 +23,7 @@ import { FixtureComponent } from './pages/fixture/fixture.component';
 import { HomeComponent } from './pages/home/home.component';
 import { PodiumComponent } from './pages/podium/podium.component';
 import { StatisticComponent } from './pages/statistic/statistic.component';
+import { MessageComponent } from './components/dialog/message/message.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { StatisticComponent } from './pages/statistic/statistic.component';
     FixtureComponent,
     GenerateFixtureComponent,
     LoadingComponent,
+    MessageComponent,
   ],
   imports: [
     BrowserModule,

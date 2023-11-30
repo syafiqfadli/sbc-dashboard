@@ -6,6 +6,7 @@ import { ResponseModel } from 'src/app/@core/models/response.model';
 import { PlayerService } from 'src/app/@core/services/player.service';
 import { StringHelper } from 'src/app/@core/utils/helpers';
 import { LoadingComponent } from '../loading/loading.component';
+import { MessageComponent } from '../message/message.component';
 
 @Component({
   selector: 'app-edit-table',
@@ -60,13 +61,22 @@ export class EditTableComponent implements OnInit {
       loadingRef.close();
 
       if (!data.isSuccess) {
-        alert(data.message);
+        this.dialog.open(MessageComponent, {
+          data: {
+            message: data.message
+          }
+        })
         return;
       }
 
       this.playerService.getPlayerList();
-      alert(data.message);
       this.addForm.reset();
+
+      this.dialog.open(MessageComponent, {
+        data: {
+          message: data.message
+        }
+      })
     });
   }
 
@@ -131,14 +141,23 @@ export class EditTableComponent implements OnInit {
       loadingRef.close();
 
       if (!data.isSuccess) {
-        alert(data.message);
+        this.dialog.open(MessageComponent, {
+          data: {
+            message: data.message
+          }
+        })
         return;
       }
 
       this.playerService.getPlayerList();
-      alert(data.message);
       this.playerMatch = [];
       this.editForm.reset();
+
+      this.dialog.open(MessageComponent, {
+        data: {
+          message: data.message
+        }
+      })
     });
   }
 
