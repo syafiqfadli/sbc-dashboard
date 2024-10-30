@@ -13,7 +13,7 @@ export class AuthComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<AuthComponent>
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.authForm = this.formBuilder.group({

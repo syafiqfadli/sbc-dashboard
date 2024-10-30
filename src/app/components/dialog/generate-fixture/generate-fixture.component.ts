@@ -82,7 +82,7 @@ export class GenerateFixtureComponent implements OnInit {
         message: "Generating fixture"
       },
       disableClose: true,
-    })
+    });
 
     const res = this.fixtureService.generateFixture(players);
 
@@ -94,7 +94,7 @@ export class GenerateFixtureComponent implements OnInit {
           data: {
             message: data.message
           }
-        })
+        });
         return;
       }
 

@@ -30,11 +30,7 @@ export class FixtureService {
       players: players,
     };
 
-    const res = this.http.post(
-      `${environment.apiUrl}/fixture/generate`,
-      body,
-      this.httpOptions
-    );
+    const res = this.http.post(`${environment.apiUrl}/fixture/generate`, body, this.httpOptions);
 
     res.subscribe((data: ResponseModel) => {
       if (data.isSuccess) {

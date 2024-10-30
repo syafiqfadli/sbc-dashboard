@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { PlayerModel } from 'src/app/@core/models/player.model';
@@ -14,10 +14,15 @@ import { MessageComponent } from '../message/message.component';
   styleUrls: ['./edit-table.component.scss'],
 })
 export class EditTableComponent implements OnInit {
+  @ViewChild('fileInput') fileInput!: ElementRef;
+
   addForm: FormGroup;
   editForm: FormGroup;
+  imageForm: FormGroup;
   players: PlayerModel[];
   playerMatch: PlayerModel[] = [];
+  selectedPlayerImage: File | null = null;
+  previewImage: string | ArrayBuffer | null = null;
 
   constructor(
     private dialog: MatDialog,
@@ -39,6 +44,10 @@ export class EditTableComponent implements OnInit {
       win: ['', Validators.required],
       lose: ['', Validators.required],
     });
+
+    this.imageForm = this.formBuilder.group({
+      name: ['', Validators.required],
+    });
   }
 
   addPlayer() {
@@ -52,7 +61,7 @@ export class EditTableComponent implements OnInit {
         message: "Adding player"
       },
       disableClose: true,
-    })
+    });
 
     const name = this.addForm.value['name'];
     const res = this.playerService.createPlayer(name);
@@ -65,7 +74,7 @@ export class EditTableComponent implements OnInit {
           data: {
             message: data.message
           }
-        })
+        });
         return;
       }
 
@@ -76,7 +85,7 @@ export class EditTableComponent implements OnInit {
         data: {
           message: data.message
         }
-      })
+      });
     });
   }
 
@@ -133,7 +142,7 @@ export class EditTableComponent implements OnInit {
         message: "Updating stats"
       },
       disableClose: true,
-    })
+    });
 
     const res = this.playerService.updateMatch(this.playerMatch);
 
@@ -145,7 +154,8 @@ export class EditTableComponent implements OnInit {
           data: {
             message: data.message
           }
-        })
+        });
+
         return;
       }
 
@@ -157,11 +167,79 @@ export class EditTableComponent implements OnInit {
         data: {
           message: data.message
         }
-      })
+      });
     });
   }
 
   capitalizeName(name: string) {
     return StringHelper.capitalizeFirst(name);
+  }
+
+  onFileSelected(event: any): void {
+    this.selectedPlayerImage = event.target.files[0];
+
+    if (this.selectedPlayerImage) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.previewImage = reader.result;
+      };
+      reader.readAsDataURL(this.selectedPlayerImage);
+    }
+  }
+
+  uploadImage(): void {
+    if (!this.selectedPlayerImage || this.imageForm.invalid) {
+      alert('Please choose image and player.');
+      return;
+    };
+
+    console.log(this.imageForm.value['name']);
+
+    const loadingRef = this.dialog.open(LoadingComponent, {
+      data: {
+        message: "Uploading player image"
+      },
+      disableClose: true,
+    });
+
+    const res = this.playerService.uploadPlayerImage(this.selectedPlayerImage, this.imageForm.value['name']);
+
+    res.subscribe({
+      next: (data: ResponseModel) => {
+        loadingRef.close();
+
+        if (!data.isSuccess) {
+          this.dialog.open(MessageComponent, {
+            data: {
+              message: data.message
+            }
+          });
+
+          return;
+        }
+
+        const messageRef = this.dialog.open(MessageComponent, {
+          data: {
+            message: data.message
+          }
+        });
+
+        messageRef.afterClosed().subscribe(() => {
+          this.fileInput.nativeElement.value = '';
+          this.selectedPlayerImage = null;
+          this.previewImage = null;
+          this.imageForm.reset();
+        });
+      },
+      error: (error) => {
+        loadingRef.close();
+
+        this.dialog.open(MessageComponent, {
+          data: {
+            message: `Image upload failed: ${error?.message}`
+          }
+        });
+      }
+    });
   }
 }

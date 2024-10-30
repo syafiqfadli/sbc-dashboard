@@ -10,7 +10,7 @@ import { PlayerService } from 'src/app/@core/services/player.service';
 export class PodiumComponent implements OnInit {
   players: Array<PlayerModel>;
 
-  constructor(private playerService: PlayerService) {}
+  constructor(private playerService: PlayerService) { }
 
   ngOnInit(): void {
     this.playerService.getPlayerList();

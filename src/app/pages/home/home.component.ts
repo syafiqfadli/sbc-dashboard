@@ -52,7 +52,8 @@ export class HomeComponent implements OnInit {
     dialogRef.afterClosed().subscribe((data) => {
       if (data) {
         this.dialog.open(EditTableComponent, {
-          width: window.screen.width > 600 ? '400px' : '100%'
+          width: window.screen.width > 600 ? '600px' : '100%',
+          height: "50%"
         });
       }
     });
@@ -79,9 +80,9 @@ export class HomeComponent implements OnInit {
         (!next || updatedAtDate > new Date(next.updatedAt).getTime())
       ) {
         return current;
-      } else {
-        return next;
       }
+
+      return next;
     }, null);
 
     if (updatedPlayer) {

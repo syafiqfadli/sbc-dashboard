@@ -39,28 +39,28 @@ export class FixtureComponent implements OnInit {
   ngOnInit(): void {
     this.searchForm = this.formBuilder.group({
       name: ['', Validators.required]
-    })
+    });
 
     this.searchForm.get('name').valueChanges.subscribe(_ => {
       this.fixtures = JSON.parse(localStorage.getItem(this.fixtureKey));
-    })
+    });
 
     if (localStorage.getItem(this.fixtureKey)) {
-      this.fixtures = JSON.parse(localStorage.getItem(this.fixtureKey))
+      this.fixtures = JSON.parse(localStorage.getItem(this.fixtureKey));
     }
 
     if (localStorage.getItem(this.statusKey)) {
-      this.vsStatus = JSON.parse(localStorage.getItem(this.statusKey))
+      this.vsStatus = JSON.parse(localStorage.getItem(this.statusKey));
     }
 
     this.fixtureService.fixturesObserver().subscribe((data) => {
       if (data.length) {
-        this.fixtures = []
+        this.fixtures = [];
         this.vsStatus = new Array(data.length);
 
         data.forEach((fx, index) => {
-          this.fixtures.push(new FixtureModel(index, fx.teamA, fx.teamB))
-        })
+          this.fixtures.push(new FixtureModel(index, fx.teamA, fx.teamB));
+        });
 
         localStorage.setItem(this.fixtureKey, JSON.stringify(this.fixtures));
         localStorage.setItem(this.statusKey, JSON.stringify(this.vsStatus));
@@ -75,23 +75,23 @@ export class FixtureComponent implements OnInit {
   }
 
   showResult() {
-    this.hasResult = true
+    this.hasResult = true;
     this.fixtures = JSON.parse(localStorage.getItem(this.fixtureKey));
 
     this.resultFixtures = this.fixtures.filter((_, index) => {
       return this.vsStatus[index] !== null && this.vsStatus[index] !== undefined;
-    })
+    });
 
-    this.calculateWinLose()
+    this.calculateWinLose();
   }
 
   showFixture() {
     this.hasResult = false;
-    this.vsStatus = JSON.parse(localStorage.getItem(this.statusKey))
+    this.vsStatus = JSON.parse(localStorage.getItem(this.statusKey));
   }
 
   disableShowResult() {
-    return !this.vsStatus.some((vs) => vs !== null)
+    return !this.vsStatus.some((vs) => vs !== null);
   }
 
   calculateWinLose() {
@@ -116,9 +116,9 @@ export class FixtureComponent implements OnInit {
       }
 
       playerStatsList = [...playerStatsList, player1, player2, player3, player4];
-    })
+    });
 
-    const playerStatsObject: { [key: string]: PlayerModel } = {};
+    const playerStatsObject: { [key: string]: PlayerModel; } = {};
 
     playerStatsList.forEach((entry) => {
       const playerName = entry.name;
@@ -131,13 +131,13 @@ export class FixtureComponent implements OnInit {
       playerStatsObject[playerName].lose += entry.lose;
     });
 
-    this.playerStats = Object.values(playerStatsObject)
+    this.playerStats = Object.values(playerStatsObject);
     this.playerStats = this.playerStats.sort((a, b) => {
       if (a.win !== b.win) {
         return b.win - a.win;
       }
       return a.lose - b.lose;
-    })
+    });
   }
 
   updatePlayers() {
@@ -152,7 +152,7 @@ export class FixtureComponent implements OnInit {
             message: "Updating stats"
           },
           disableClose: true,
-        })
+        });
 
         const res = this.playerService.updateMatch(this.playerStats);
 
@@ -164,20 +164,20 @@ export class FixtureComponent implements OnInit {
               data: {
                 message: data.message
               }
-            })
+            });
             return;
           }
 
           this.playerService.getPlayerList();
-          localStorage.removeItem(this.fixtureKey)
-          localStorage.removeItem(this.statusKey)
+          localStorage.removeItem(this.fixtureKey);
+          localStorage.removeItem(this.statusKey);
           this.hasResult = false;
 
           this.dialog.open(MessageComponent, {
             data: {
               message: data.message
             }
-          })
+          });
         });
       }
     });
@@ -208,7 +208,7 @@ export class FixtureComponent implements OnInit {
   }
 
   hasFixtureKey(): string | null {
-    return localStorage.getItem(this.fixtureKey)
+    return localStorage.getItem(this.fixtureKey);
   }
 
   searchFixture() {
@@ -225,6 +225,6 @@ export class FixtureComponent implements OnInit {
       const searchTeamB = player.includes(fx.teamB[0]) && player.includes(fx.teamB[1]);
 
       return searchTeamA || searchTeamB;
-    })
+    });
   }
 }

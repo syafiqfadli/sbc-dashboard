@@ -5,6 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './silver-crown.component.html',
   styleUrls: ['./silver-crown.component.scss']
 })
-export class SilverCrownComponent {
-
-}
+export class SilverCrownComponent { }

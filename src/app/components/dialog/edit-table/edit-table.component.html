@@ -38,9 +38,34 @@
       </div>
     </mat-tab>
     <mat-tab label="Add Player">
-      <form id="add-player" [formGroup]="addForm" name="addForm">
+      <form class="player-tab" [formGroup]="addForm" name="addForm">
         <input type="text" placeholder="Enter name" formControlName="name" />
         <button (click)="addPlayer()">Add</button>
+      </form>
+    </mat-tab>
+    <mat-tab label="Upload Profile Pic">
+      <form class="player-tab" [formGroup]="imageForm" name="imageForm">
+        <div *ngIf="previewImage" id="preview-image">
+          <img
+            [src]="previewImage"
+            alt="Player image"
+            style="max-width: 200px; max-height: 200px"
+          />
+        </div>
+        <div id="player-image">
+          <select formControlName="name">
+            <option *ngFor="let player of players" [value]="player.name">
+              {{ capitalizeName(player.name) }}
+            </option>
+          </select>
+          <input
+            #fileInput
+            type="file"
+            accept="image/*"
+            (change)="onFileSelected($event)"
+          />
+        </div>
+        <button (click)="uploadImage()">Upload</button>
       </form>
     </mat-tab>
   </mat-tab-group>

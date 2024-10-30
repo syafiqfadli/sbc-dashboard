@@ -5,6 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './bronze-crown.component.html',
   styleUrls: ['./bronze-crown.component.scss']
 })
-export class BronzeCrownComponent {
-
-}
+export class BronzeCrownComponent { }

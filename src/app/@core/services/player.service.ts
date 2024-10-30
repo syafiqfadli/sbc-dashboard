@@ -26,10 +26,7 @@ export class PlayerService {
   }
 
   getPlayerList() {
-    const res = this.http.get(
-      `${environment.apiUrl}/player/list`,
-      this.httpOptions
-    );
+    const res = this.http.get(`${environment.apiUrl}/player/list`, this.httpOptions);
 
     res.subscribe((data: ResponseModel) => {
       if (data.isSuccess) {
@@ -43,11 +40,7 @@ export class PlayerService {
       name: playerName,
     };
 
-    const res = this.http.post(
-      `${environment.apiUrl}/player/create`,
-      body,
-      this.httpOptions
-    );
+    const res = this.http.post(`${environment.apiUrl}/player/create`, body, this.httpOptions);
 
     return res;
   }
@@ -57,11 +50,18 @@ export class PlayerService {
       playerList: playerList,
     };
 
-    const res = this.http.post(
-      `${environment.apiUrl}/player/update`,
-      body,
-      this.httpOptions
-    );
+    const res = this.http.post(`${environment.apiUrl}/player/update`, body, this.httpOptions);
+
+    return res;
+  }
+
+  uploadPlayerImage(file: File, playerName: string) {
+    const formData = new FormData();
+
+    formData.append('file', file, file.name);
+    formData.append('player', playerName);
+
+    const res = this.http.post(`${environment.apiUrl}/upload/players`, formData);
 
     return res;
   }

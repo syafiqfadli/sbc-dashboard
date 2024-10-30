@@ -19,8 +19,9 @@
     "
   >
     <img
-      src="/assets/icon/person.png"
-      alt=""
+      [src]="imageUrl"
+      (error)="onImageError()"
+      [alt]="player.name"
       [style]="
         rank === 1
           ? 'height: 60px'

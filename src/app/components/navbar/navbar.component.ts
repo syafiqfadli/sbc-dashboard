@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class NavbarComponent {
   hamburgerOpen: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   handleHamburger() {
     this.hamburgerOpen = !this.hamburgerOpen;

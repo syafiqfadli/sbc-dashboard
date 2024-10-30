@@ -12,6 +12,6 @@ export class MessageComponent {
   constructor(@Inject(MAT_DIALOG_DATA) private data: any) { }
 
   ngOnInit(): void {
-    this.message = this.data['message']
+    this.message = this.data['message'];
   }
 }
