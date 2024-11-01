@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://sbc.cherno.online/api/v1',
+  apiUrl: 'https://sbc.sfcloud.asia/api/v1',
 };
